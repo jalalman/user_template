@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>first database connection</title>
+</head>
+<body>
+    <h1>All the Users</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Delete</th>
+        </tr>
+        {% for i in users %}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.first_name}} {{i.last_name}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.age}}</td>
+            <td><a href="/delete_user/{{i.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    <h1>add a User</h1>
+    <form action="/add_user" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="Firstname">First name</label>
+            <input type="text" name="fname">
+            <label for="lastname">Last name</label>
+            <input type="text" name="lname">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" name="email">
+            <label for="age">age</label>
+            <input type="text" name="age">
+        </div>
+        <button type="submit">add</button>
+    </form>
+    
+</body>
+</html>
